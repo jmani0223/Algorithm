@@ -50,3 +50,38 @@ int main() {
 	
 	return 0;
 }
+
+
+### 2606
+
+```c
+#include <iostream>
+using namespace std;
+
+#define MAX_VALUE 1001
+#define start 1
+
+int map[MAX_VALUE][MAX_VALUE];
+int visit[MAX_VALUE];
+int n, m, x, y, count =0;
+
+void dfs(int v){
+	visit[v] = 1; 
+	count +=1;
+	for(int i=1; i<=n; i++){
+		if(visit[i]==1 || map[v][i]==0)
+			continue;
+		dfs(i);
+	}
+}
+int main() {
+	cin >> n >> m;
+	int i=0;
+	for(i=0; i<m; i++){
+		cin >> x >> y;
+		map[x][y] = map[y][x] = 1;
+	}
+	dfs(start);
+	cout << count-1; 
+	return 0;
+}
