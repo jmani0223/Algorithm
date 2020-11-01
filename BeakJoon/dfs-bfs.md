@@ -50,8 +50,7 @@ int main() {
 	
 	return 0;
 }
-
-
+```
 ### 2606
 
 ```c
@@ -85,3 +84,4 @@ int main() {
 	cout << count-1; 
 	return 0;
 }
+```
