@@ -97,7 +97,7 @@ using namespace std;
 #define MAX_VALUE 25
 int map[MAX_VALUE][MAX_VALUE];
 int visit[MAX_VALUE][MAX_VALUE];
-int dx[4]={-1,1,0,0};
+int dx[4]={-1,1,0,0}; //4방
 int dy[4]={0,0,1,-1};
 int cnt=0, n;
 
@@ -108,16 +108,17 @@ void dfs(int x, int y){
 	visit[x][y]=true;
 	
 	for(int i=0; i<4; i++){
-		int nx=x+dx[i];
+		int nx=x+dx[i]; //현재 자리에서 위, 아래, 옆
 		int ny=y+dy[i];
-		if(nx < 0 || nx >= n || ny < 0 || ny >= n) 
+		if(nx < 0 || nx >= n || ny < 0 || ny >= n) //배열의 범주를 벗어났다면
 			continue;
-		if(map[nx][ny]==1 && visit[nx][ny]==false)
+		if(map[nx][ny]==1 && visit[nx][ny]==false) //가야할 곳이고 안가봤다면
 			dfs(nx, ny);
 	}
 }
 
 int main() {
+	//입력값 처리
 	string input;
 	cin >> n;
 	for(int i=0; i<n; i++){
@@ -126,9 +127,10 @@ int main() {
 		}
 	}
 	
+	//solution
 	for(int i=0; i<n; i++){
 		for(int j=0; j<n; j++){
-			if(map[i][j]==1 && visit[i][j]==false){
+			if(map[i][j]==1 && visit[i][j]==false){ //가야할 곳(1)이거나 안가본 곳이라면(이전 단지는 안가야함)
 				cnt=0;
 				dfs(i,j);
 				cnt_vec.push_back(cnt);
@@ -136,6 +138,7 @@ int main() {
 		}
 	}
 	
+	//출력값 처리
 	sort(cnt_vec.begin(), cnt_vec.end());
 	cout << cnt_vec.size() << endl;
 	for(int i=0;i<cnt_vec.size(); i++){
