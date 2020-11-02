@@ -85,3 +85,62 @@ int main() {
 	return 0;
 }
 ```
+### 2667
+
+```c
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+#define MAX_VALUE 25
+int map[MAX_VALUE][MAX_VALUE];
+int visit[MAX_VALUE][MAX_VALUE];
+int dx[4]={-1,1,0,0};
+int dy[4]={0,0,1,-1};
+int cnt=0, n;
+
+vector<int> cnt_vec;
+
+void dfs(int x, int y){
+	cnt++;
+	visit[x][y]=true;
+	
+	for(int i=0; i<4; i++){
+		int nx=x+dx[i];
+		int ny=y+dy[i];
+		if(nx < 0 || nx >= n || ny < 0 || ny >= n) 
+			continue;
+		if(map[nx][ny]==1 && visit[nx][ny]==false)
+			dfs(nx, ny);
+	}
+}
+
+int main() {
+	string input;
+	cin >> n;
+	for(int i=0; i<n; i++){
+		for(int j=0; j<n; j++){
+			scanf("%1d", &map[i][j]);
+		}
+	}
+	
+	for(int i=0; i<n; i++){
+		for(int j=0; j<n; j++){
+			if(map[i][j]==1 && visit[i][j]==false){
+				cnt=0;
+				dfs(i,j);
+				cnt_vec.push_back(cnt);
+			}
+		}
+	}
+	
+	sort(cnt_vec.begin(), cnt_vec.end());
+	cout << cnt_vec.size() << endl;
+	for(int i=0;i<cnt_vec.size(); i++){
+		cout << cnt_vec[i]<< endl;
+	}
+	return 0;
+}
+```
